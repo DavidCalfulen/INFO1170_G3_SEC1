@@ -5,84 +5,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Validación de Reportes</title>
+    <link rel="stylesheet" href="styless.css">
 </head>
 
 <body>
-    <h1>Formulario de Validación de Reportes</h1>
-    <form action="/validar_reporte" method="post">
-        <!-- Información del Reporte -->
-        <fieldset>
-            <legend>Detalles del Reporte</legend>
-            <label for="id_reporte">ID del Reporte:</label>
-            <input type="text" id="id_reporte" name="id_reporte" required readonly>
-            <br><br>
+    <header>
+        <h1>Luz Alerta</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Servicios</a></li>
+                <li><a href="#">Sobre Nosotros</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
 
-            <label for="usuario_reportante">Usuario que Reporta:</label>
-            <input type="text" id="usuario_reportante" name="usuario_reportante" required readonly>
-            <br><br>
+    <main>
+        <h1>Formulario de Validación de Reportes</h1>
+        <form action="/validar_reporte" method="post">
+            </head>
 
-            <label for="tipo_problema">Tipo de Problema Reportado:</label>
-            <input type="text" id="tipo_problema" name="tipo_problema" required readonly>
-            <br><br>
+            <body>
+                <h1>Formulario de Validación de Reportes</h1>
+                <form action="/validar_reporte" method="post">
+                    <!-- Información del Reporte -->
+                    <fieldset>
+                        <legend>Detalles del Reporte</legend>
+                        <label for="id_reporte">ID del Reporte:</label>
+                        <input type="text" id="id_reporte" name="id_reporte" required readonly>
+                        <br><br>
 
-            <label for="descripcion_problema">Descripción del Problema:</label>
-            <textarea id="descripcion_problema" name="descripcion_problema" rows="4" cols="50" readonly></textarea>
-            <br><br>
+                        <label for="usuario_reportante">Usuario que Reporta:</label>
+                        <input type="text" id="usuario_reportante" name="usuario_reportante" required readonly>
+                        <br><br>
 
-            <label for="fecha_hora_inicio">Fecha y Hora del Inicio del Problema:</label>
-            <input type="text" id="fecha_hora_inicio" name="fecha_hora_inicio" required readonly>
-            <br><br>
+                        <label for="tipo_problema">Tipo de Problema Reportado:</label>
+                        <input type="text" id="tipo_problema" name="tipo_problema" required readonly>
+                        <br><br>
 
-            <label for="afectacion_servicio">Afectación del Servicio:</label>
-            <input type="text" id="afectacion_servicio" name="afectacion_servicio" required readonly>
-            <br><br>
+                        <label for="descripcion_problema">Descripción del Problema:</label>
+                        <textarea id="descripcion_problema" name="descripcion_problema" rows="4" cols="50"
+                            readonly></textarea>
+                        <br><br>
 
-            <label for="geolocalizacion">Geolocalización:</label>
-            <input type="text" id="geolocalizacion" name="geolocalizacion" required readonly>
-            <br><br>
-        </fieldset>
+                        <label for="fecha_hora_inicio">Fecha y Hora del Inicio del Problema:</label>
+                        <input type="text" id="fecha_hora_inicio" name="fecha_hora_inicio" required readonly>
+                        <br><br>
 
-        <!-- Validación del Reporte -->
-        <fieldset>
-            <legend>Validación del Reporte</legend>
+                        <label for="afectacion_servicio">Afectación del Servicio:</label>
+                        <input type="text" id="afectacion_servicio" name="afectacion_servicio" required readonly>
+                        <br><br>
 
-            <label for="estado_reporte">Estado del Reporte:</label>
-            <select id="estado_reporte" name="estado_reporte" required>
-                <option value="pendiente">Pendiente</option>
-                <option value="aprobado">Aprobado</option>
-                <option value="rechazado">Rechazado</option>
-            </select>
-            <br><br>
+                        <label for="geolocalizacion">Geolocalización:</label>
+                        <input type="text" id="geolocalizacion" name="geolocalizacion" required readonly>
+                        <br><br>
+                    </fieldset>
 
-            <label for="comentarios_empresa">Comentarios de Validación:</label>
-            <textarea id="comentarios_empresa" name="comentarios_empresa" rows="4" cols="50"></textarea>
-            <br><br>
+                    <!-- Validación del Reporte -->
+                    <fieldset>
+                        <legend>Validación del Reporte</legend>
 
-            <label for="prioridad_respuesta">Nivel de Prioridad Asignado:</label>
-            <select id="prioridad_respuesta" name="prioridad_respuesta">
-                <option value="bajo">Bajo</option>
-                <option value="medio">Medio</option>
-                <option value="alto">Alto</option>
-            </select>
-            <br><br>
-        </fieldset>
+                        <label for="estado_reporte">Estado del Reporte:</label>
+                        <select id="estado_reporte" name="estado_reporte" required>
+                            <option value="pendiente">Pendiente</option>
+                            <option value="aprobado">Aprobado</option>
+                            <option value="rechazado">Rechazado</option>
+                        </select>
+                        <br><br>
 
-        <!-- Confirmación -->
-        <fieldset>
-            <legend>Confirmación del Responsable</legend>
+                        <label for="comentarios_empresa">Comentarios de Validación:</label>
+                        <textarea id="comentarios_empresa" name="comentarios_empresa" rows="4" cols="50"></textarea>
+                        <br><br>
 
-            <label for="validador_nombre">Nombre del Validador:</label>
-            <input type="text" id="validador_nombre" name="validador_nombre" required>
-            <br><br>
+                        <label for="prioridad_respuesta">Nivel de Prioridad Asignado:</label>
+                        <select id="prioridad_respuesta" name="prioridad_respuesta">
+                            <option value="bajo">Bajo</option>
+                            <option value="medio">Medio</option>
+                            <option value="alto">Alto</option>
+                        </select>
+                        <br><br>
+                    </fieldset>
 
-            <label for="validador_firma">Firma Digital (ID del Validador):</label>
-            <input type="text" id="validador_firma" name="validador_firma" required>
-            <br><br>
-        </fieldset>
+                    <!-- Confirmación -->
+                    <fieldset>
+                        <legend>Confirmación del Responsable</legend>
 
-        <!-- Botón de Envío -->
-        <button type="submit">Validar Reporte</button>
-    </form>
+                        <label for="validador_nombre">Nombre del Validador:</label>
+                        <input type="text" id="validador_nombre" name="validador_nombre" required>
+                        <br><br>
+
+                        <label for="validador_firma">Firma Digital (ID del Validador):</label>
+                        <input type="text" id="validador_firma" name="validador_firma" required>
+                        <br><br>
+                    </fieldset>
+
+                    <!-- Botón de Envío -->
+                    <button type="submit">Validar Reporte</button>
+                </form>
+    </main>
+
+    <footer>
+        <p>© 2024 Mi Página Web. Todos los derechos reservados.</p>
+    </footer>
 </body>
 
 </html>
