@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Validación de Reportes</title>
-    <link rel="stylesheet" href="styless.css">
+    <link rel="stylesheet" href="styles.css">
     <script>
         function enviarFormularioValidacion(event) {
             event.preventDefault();
@@ -31,13 +31,12 @@
 
 <body>
     <header>
-        <h1>Luz Alerta</h1>
-        <nav>
+        <nav class="navbar">
+            <h1>Luz Alerta</h1>
             <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Servicios</a></li>
-                <li><a href="#">Sobre Nosotros</a></li>
-                <li><a href="#">Contacto</a></li>
+                <li><a href="#login">Login</a></li>
+                <li><a href="#about">Sobre Nosotros</a></li>
+                <li><a href="#contact">Contacto</a></li>
             </ul>
         </nav>
     </header>
@@ -49,7 +48,6 @@
                 </head>
 
                 <body>
-                    <h1>Formulario de Validación de Reportes</h1>
                     <form action="/validar_reporte" method="post">
                         <!-- Información del Reporte -->
                         <fieldset>
@@ -128,7 +126,7 @@
     </main>
 
     <footer>
-        <p>© 2024 Mi Página Web. Todos los derechos reservados.</p>
+        <p>© 2024 Luz Alerta. Todos los derechos reservados.</p>
     </footer>
 </body>
 
