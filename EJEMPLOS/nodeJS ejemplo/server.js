@@ -1,4 +1,7 @@
-/* Node.js es un entorno de ejecución de JavaScript, permite ejecutar código JavaScript fuera de un navegador, 
+/* Descaragar e instalar Node con aterioridad, revisar que esté instalado con PATH
+
+DESCRICION
+Node.js es un entorno de ejecución de JavaScript, permite ejecutar código JavaScript fuera de un navegador, 
 en un servidor, lo que significa que puedes usar JavaScript para crear aplicaciones del lado del servidor, como servidores 
 web, APIs y herramientas de línea de comandos.
 
