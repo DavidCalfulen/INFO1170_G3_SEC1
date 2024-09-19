@@ -1,0 +1,81 @@
+1. Viewport Meta Tag
+Añade esta etiqueta en la sección <head> de tu HTML para que el navegador sepa cómo escalar la página en dispositivos móviles:
+----------------------------------------------------------------------------
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+----------------------------------------------------------------------------
+2. Media Queries
+Usa media queries en tu archivo CSS para definir estilos específicos para diferentes tamaños de pantalla. Aquí hay algunos ejemplos básicos:
+--------------------------------------------------------------------------------
+/* Estilos generales para dispositivos de escritorio */
+body {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Para pantallas de hasta 768px de ancho (tablets y móviles) */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  .container {
+    flex-direction: column; /* Cambia el diseño a vertical */
+  }
+}
+
+/* Para pantallas de hasta 480px de ancho (móviles pequeños) */
+@media (max-width: 480px) {
+  body {
+    font-size: 12px;
+  }
+  .menu {
+    display: none; /* Esconde el menú si es necesario */
+  }
+  .container {
+    padding: 10px; /* Ajusta el padding */
+  }
+}
+---------------------------------------------------------------------------------
+3. Diseño Fluido
+Usa porcentajes o unidades relativas como em, rem, y vw/vh (ancho y alto de la ventana) en lugar de px para que los elementos se ajusten dinámicamente:
+---------------------------------------------------------------
+.container {
+  width: 80%; /* Mejor que un ancho fijo en píxeles */
+  padding: 2em; /* Utiliza em en lugar de px */
+}
+--------------------------------------------------------------
+4. Grid y Flexbox
+Aprovecha CSS Grid o Flexbox para crear diseños flexibles que se adapten automáticamente al tamaño de la pantalla:
+-----------------------------------------------------------------------------------------------------------------------
+/* Usando Flexbox */
+.container {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se muevan a la siguiente fila si no caben */
+  justify-content: space-around;
+}
+
+/* Usando CSS Grid */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajusta automáticamente el número de columnas */
+  gap: 20px;
+}
+----------------------------------------------------------------------------------------------------------------------
+5. Imágenes Responsivas
+Asegúrate de que las imágenes se adapten al tamaño de la pantalla:
+-----------------------------------------------------------------------
+img {
+  max-width: 100%; /* Ajusta la imagen al tamaño del contenedor */
+  height: auto;
+}
+-----------------------------------------------------------------------
+6. Fuentes Responsivas
+Utiliza unidades relativas para el tamaño de las fuentes:
+----------------------------------------------------------------------
+body {
+  font-size: 1rem; /* Se adapta según el tamaño de pantalla */
+}
+----------------------------------------------------------------------
+7. Prueba en Diferentes Dispositivos
+Usa las herramientas de desarrollo de tu navegador (F12 en Chrome o Firefox) para cambiar entre vistas de escritorio y móvil, y prueba tu página en diferentes resoluciones.

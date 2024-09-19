@@ -1,135 +1,121 @@
-* {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-font-family: 'Arial', sans-serif;
-}
+<!DOCTYPE html>
+<html lang="es">
 
-body {
-background-color: #f4f6f9; /* Fondo gris claro */
-color: #333; /* Texto gris oscuro */
-display: flex;
-flex-direction: column;
-min-height: 100vh;
-}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Reporte de Incidencias</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function enviarFormularioReporte(event) {
+            event.preventDefault();
 
-/* Estilo del encabezado */
-header {
-background-color: #003366; /* Azul oscuro */
-color: white;
-padding: 20px;
-text-align: center;
-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+            const formData = new FormData(event.target);
 
-.navbar {
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 10px 20px;
-}
+            fetch('/enviar_reporte', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Formulario enviado', data);
+                    alert('Reporte enviado correctamente');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Hubo un problema al enviar el reporte');
+                });
+        }
+    </script>
+</head>
 
-.navbar ul {
-list-style: none;
-display: flex;
-margin: 0;
-padding: 0;
-}
+<body>
+    <header>
+        <nav class="navbar">
+            <h1>Luz Alerta</h1>
+            <ul>
+                <li><a href="#login">Login</a></li>
+                <li><a href="#about">Sobre Nosotros</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
 
-.navbar ul li {
-margin-left: 20px;
-}
+    <main>
+        <h1>Formulario de Reporte de Incidencias</h1>
+        <form id="form-reporte" onsubmit="enviarFormularioReporte(event)" enctype="multipart/form-data">
+            <form action="/enviar_reporte" method="post" enctype="multipart/form-data">
+                <fieldset>
+                    <legend>Descripción de la Incidencia</legend>
+                    <label for="tipo_problema">Tipo de Problema:</label>
+                    <select id="tipo_problema" name="tipo_problema">
+                        <option value="corte_total_energia">Corte total de energía</option>
+                        <option value="baja_tension">Baja tensión</option>
+                        <option value="oscilaciones_voltaje">Oscilaciones de voltaje</option>
+                        <option value="ruido_chispas">Ruido o chispas en la red eléctrica</option>
+                        <!-- Agregar más opciones según sea necesario -->
+                    </select>
+                    <br><br>
 
-.navbar ul li a {
-color: white;
-text-decoration: none;
-padding: 8px 16px;
-border-radius: 4px;
-transition: background-color 0.3s;
-}
+                    <label for="descripcion_detallada">Descripción Detallada:</label>
+                    <textarea id="descripcion_detallada" name="descripcion_detallada" rows="4" cols="50"
+                        required></textarea>
+                    <br><br>
 
-.navbar ul li a:hover {
-background-color: #004080;
-}
+                    <label for="fecha_hora_inicio">Fecha y Hora del Inicio del Problema:</label>
+                    <input type="datetime-local" id="fecha_hora_inicio" name="fecha_hora_inicio" required>
+                    <br><br>
 
-main {
-flex: 1;
-padding: 20px;
-display: flex;
-justify-content: center;
-align-items: center;
-}
+                    <label for="afectacion_servicio">Afectación del Servicio:</label>
+                    <input type="text" id="afectacion_servicio" name="afectacion_servicio" required>
+                    <br><br>
+                </fieldset>
 
-form {
-background-color: white;
-padding: 30px;
-border-radius: 10px;
-box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-width: 100%;
-max-width: 600px;
-}
+                <!-- Confirmación Visual y Geolocalización -->
+                <fieldset>
+                    <legend>Confirmación Visual y Geolocalización</legend>
+                    <label for="imagenes_videos">Subida de Imágenes o Videos:</label>
+                    <input type="file" id="imagenes_videos" name="imagenes_videos[]" multiple>
+                    <br><br>
 
-fieldset {
-border: none;
-margin-bottom: 20px;
-}
+                    <label for="geolocalizacion">Geolocalización Automática:</label>
+                    <input type="checkbox" id="geolocalizacion" name="geolocalizacion">
+                    <label for="geolocalizacion">Activar Geolocalización</label>
+                    <br><br>
+                </fieldset>
 
-legend {
-font-size: 1.5em;
-margin-bottom: 10px;
-color: #003366;
-font-weight: bold;
-}
+                <!-- Información Adicional y Comentarios -->
+                <fieldset>
+                    <legend>Información Adicional y Comentarios</legend>
+                    <label for="comentarios_adicionales">Comentarios Adicionales:</label>
+                    <textarea id="comentarios_adicionales" name="comentarios_adicionales" rows="4" cols="50"></textarea>
+                    <br><br>
 
-label {
-display: block;
-margin-bottom: 8px;
-font-weight: bold;
-color: #333;
-}
+                    <label for="disponibilidad_contacto">Disponibilidad para Contacto:</label>
+                    <input type="text" id="disponibilidad_contacto" name="disponibilidad_contacto">
+                    <br><br>
+                </fieldset>
 
-input[type="text"],
-input[type="datetime-local"],
-select,
-textarea {
-width: 100%;
-padding: 10px;
-margin-bottom: 20px;
-border: 1px solid #ddd;
-border-radius: 5px;
-background-color: #f9f9f9;
-transition: border-color 0.3s;
-}
+                <!-- Prioridad -->
+                <fieldset>
+                    <legend>Prioridad</legend>
+                    <label for="nivel_urgencia">Nivel de Urgencia:</label>
+                    <select id="nivel_urgencia" name="nivel_urgencia">
+                        <option value="bajo">Bajo</option>
+                        <option value="medio">Medio</option>
+                        <option value="alto">Alto</option>
+                    </select>
+                    <br><br>
+                </fieldset>
 
-input[type="text"]:focus,
-input[type="datetime-local"]:focus,
-select:focus,
-textarea:focus {
-border-color: #007bb5; /* Azul claro */
-}
+                <!-- Botón de Envío -->
+                <button type="submit">Enviar Reporte</button>
+            </form>
+    </main>
 
-button {
-background-color: #007bb5; /* Azul claro */
-color: white;
-padding: 12px 20px;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-width: 100%;
-font-size: 1.2em;
-transition: background-color 0.3s;
-}
+    <footer>
+        <p>© 2024 Luz Alerta. Todos los derechos reservados.</p>
+    </footer>
+</body>
 
-button:hover {
-background-color: #005f8d; /* Azul oscuro */
-}
-
-footer {
-background-color: #003366;
-color: white;
-text-align: center;
-padding: 15px;
-position: relative;
-bottom: 0;
-width: 100%;
-}
+</html>
