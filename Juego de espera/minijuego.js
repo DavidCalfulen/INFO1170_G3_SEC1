@@ -27,7 +27,10 @@ let lives = 3;
 let livesText;
 let lastFired = 0;
 let enemyTimer = 0;
-let spawnInterval = 1000; // Intervalo de aparición de enemigos (en milisegundos)
+let spawnInterval = 800; // Reducimos el intervalo para que aparezcan más enemigos (800ms)
+let enemySpeed = -200; // Velocidad inicial de los enemigos
+let difficultyTimer = 0; // Temporizador para aumentar la dificultad
+let isGameOver = false; // Variable para manejar el estado de Game Over
 
 function preload() {
   this.load.image('background', 'back.png');
@@ -69,43 +72,45 @@ function create() {
 }
 
 function update(time, delta) {
-  if (enemyTimer !== -1) { // Solo generar enemigos si no es Game Over
+  if (!isGameOver) {
+    // Control del temporizador de enemigos
     enemyTimer += delta;
     if (enemyTimer > spawnInterval) {
       spawnEnemy();
-      enemyTimer = 0; // Reiniciar el temporizador para la próxima aparición
+      enemyTimer = 0;
     }
-  }
-  // Control del jugador
-  if (cursors.left.isDown) {
-    player.setVelocityX(-160);
-  } else if (cursors.right.isDown) {
-    player.setVelocityX(160);
-  } else {
-    player.setVelocityX(0);
-  }
 
-  if (cursors.up.isDown) {
-    player.setVelocityY(-160);
-  } else if (cursors.down.isDown) {
-    player.setVelocityY(160);
-  } else {
-    player.setVelocityY(0);
-  }
-
-  // Aparición constante de enemigos
-  enemyTimer += delta;
-  if (enemyTimer > spawnInterval) {
-    spawnEnemy();
-    enemyTimer = 0; // Reiniciar el temporizador para la próxima aparición
-  }
-
-  // Verificar si algún enemigo ha salido de la pantalla y eliminarlo
-  enemies.children.iterate(function (enemy) {
-    if (enemy && enemy.x < -50) { // Fuera de la pantalla
-      enemy.destroy();
+    // Aumentar la dificultad con el tiempo
+    difficultyTimer += delta;
+    if (difficultyTimer > 5000) { // Incrementa la dificultad cada 5 segundos
+      enemySpeed -= 20; // Los enemigos se vuelven más rápidos
+      difficultyTimer = 0; // Reiniciar el temporizador de dificultad
     }
-  });
+
+    // Control del jugador
+    if (cursors.left.isDown) {
+      player.setVelocityX(-160);
+    } else if (cursors.right.isDown) {
+      player.setVelocityX(160);
+    } else {
+      player.setVelocityX(0);
+    }
+
+    if (cursors.up.isDown) {
+      player.setVelocityY(-160);
+    } else if (cursors.down.isDown) {
+      player.setVelocityY(160);
+    } else {
+      player.setVelocityY(0);
+    }
+
+    // Verificar si algún enemigo ha salido de la pantalla y eliminarlo
+    enemies.children.iterate(function (enemy) {
+      if (enemy && enemy.x < -50) { // Fuera de la pantalla
+        enemy.destroy();
+      }
+    });
+  }
 }
 
 // Función para disparar
@@ -144,16 +149,17 @@ function hitPlayer(player, enemy) {
 
 // Función para generar enemigos aleatoriamente
 function spawnEnemy() {
-  if (gameOverCondition) return; // No generar enemigos si es Game Over
+  const numberOfEnemies = Phaser.Math.Between(1, 4); // Genera entre 2 y 5 enemigos cada vez
 
-  let enemy = enemies.create(Phaser.Math.Between(800, 1000), Phaser.Math.Between(100, 500), 'enemy');
-  enemy.setVelocityX(-200);
-  enemy.setCollideWorldBounds(true);
-  enemy.setBounce(1);
+  for (let i = 0; i < numberOfEnemies; i++) {
+    const enemy = enemies.create(800, Phaser.Math.Between(50, 550), 'enemy');
+    enemy.setVelocityX(enemySpeed); // La velocidad de los enemigos aumenta con el tiempo
+  }
 }
 
 // Final del juego
 function gameOver(scene) {
+  isGameOver = true; // Indicar que el juego ha terminado
   const gameOverText = scene.add.text(400, 300, 'GAME OVER\n ENTER para reiniciar', {
     fontSize: '50px',
     fill: '#fff',
@@ -161,17 +167,12 @@ function gameOver(scene) {
   });
   gameOverText.setOrigin(0.5);
 
-  // Detener la generación de enemigos y las físicas
-  scene.time.removeAllEvents();  // Eliminar todos los eventos de tiempo (incluido el de los enemigos)
-  scene.physics.pause();         // Pausar las físicas
-
   // Escuchar la tecla "enter" para reiniciar el juego
   scene.input.keyboard.once('keydown-ENTER', function () {
     gameOverText.destroy(); // Eliminar el texto de Game Over
     restartGame(scene);     // Reiniciar el juego
   });
 }
-
 
 // Clase de balas
 class Bullet extends Phaser.Physics.Arcade.Sprite {
@@ -200,18 +201,13 @@ class Bullet extends Phaser.Physics.Arcade.Sprite {
 function restartGame(scene) {
   score = 0;
   lives = 3;
+  enemySpeed = -200; // Restablecer la velocidad de los enemigos
+  spawnInterval = 800; // Restablecer el intervalo de aparición
+  isGameOver = false; // Restablecer el estado del juego
   scoreText.setText('Puntaje: ' + score);
   livesText.setText('Vidas: ' + lives);
   player.clearTint();
   player.setPosition(100, 300);
-  enemies.clear(true, true);    // Eliminar todos los enemigos en pantalla
-
-  // Reiniciar las físicas y los eventos de tiempo
-  scene.physics.resume();       // Reanudar las físicas
-  scene.time.addEvent({         // Reiniciar la generación de enemigos
-    delay: 1000,
-    callback: spawnEnemy,
-    callbackScope: scene,
-    loop: true
-  });
+  enemies.clear(true, true); // Eliminar todos los enemigos en pantalla
+  scene.physics.resume(); // Reanudar las físicas
 }
