@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Título de la Página</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- CDN más confiable de Chart.js -->
+</head>
+<body>
+    <canvas id="myChart" width="400" height="400"></canvas>
+
+    <script>
+        // Asegúrate de que el código se ejecute una vez que el DOM esté completamente cargado
+        window.onload = function() {
+            var ctx = document.getElementById("myChart").getContext("2d");
+            var myChart = new Chart(ctx, {
+                type: 'bar', // Tipo de gráfico
+                data: {
+                    labels: ['Perro', 'Gato', 'Ave'], // Etiquetas como cadenas de texto
+                    datasets: [{
+                        label: 'Num datos',
+                        data: [10, 9, 15], // Datos numéricos
+                        backgroundColor: [
+                            'rgb(66, 134, 244)',  // Azul
+                            'rgb(74, 135, 72)',   // Verde
+                            'rgb(229, 89, 50)'    // Naranja
+                        ],
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true // Asegurarse de que el eje y comience en 0
+                        }
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>

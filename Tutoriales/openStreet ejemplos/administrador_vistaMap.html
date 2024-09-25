@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asignación de Trabajadores - Mapa de Temuco</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        body {
+            background-color: #0e2647;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-top: 20px;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+        }
+        .map-section, .admin-panel {
+            background-color: #1c3d6e;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .map-section {
+            width: 60%;
+        }
+        #map {
+            height: 400px;
+            width: 100%;
+            border-radius: 10px;
+        }
+        .admin-panel {
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .admin-panel h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .worker-assignment {
+            margin-bottom: 20px;
+        }
+        .worker-assignment label {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1rem;
+        }
+        button {
+            background-color: #ff6f61;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #ff5a4f;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #ccc;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Asignación de Trabajadores - Mapa de Temuco</h1>
+
+    <div class="container">
+        <!-- Sección del mapa dinámico -->
+        <div class="map-section">
+            <h2>Mapa de zonas afectadas</h2>
+            <div id="map"></div>
+        </div>
+
+        <!-- Panel de administración -->
+        <div class="admin-panel">
+            <h2>Asignar Trabajadores</h2>
+            <div class="worker-assignment">
+                <label for="worker">Seleccionar Brigada:</label>
+                <select id="worker">
+                    <option value="brigada">brigada 1</option>
+                    <option value="brigada">brigada 2</option>
+                    <option value="brigada">brigada 3</option>
+                </select>
+
+                <label for="zone">Seleccionar Zona:</label>
+                <select id="zone">
+                    <option value="zona1">Zona Alta Prioridad</option>
+                    <option value="zona2">Zona Media Prioridad</option>
+                    <option value="zona3">Zona Baja Prioridad</option>
+                </select>
+
+                <button onclick="assignWorker()">Asignar Trabajador</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>This site is protected by reCAPTCHA Enterprise. Dalibemedia's Privacy Policy and Terms of Use apply.</p>
+    </div>
+
+    <!-- Scripts de Leaflet para el mapa -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Inicializar el mapa en Temuco (latitud y longitud)
+        var map = L.map('map').setView([-38.7359, -72.5904], 13); // Coordenadas de Temuco
+
+        // Añadir mapa base desde OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Marcadores con círculos para las zonas afectadas
+        var locations = [
+            { coords: [-38.7300, -72.5800], color: 'red', radius: 500, message: 'Alta prioridad' },  // Alta prioridad
+            { coords: [-38.7469, -72.5957], color: 'orange', radius: 325, message: 'Mediana prioridad' }, // Mediana prioridad
+            { coords: [-38.7200, -72.5600], color: 'yellow', radius: 550, message: 'Baja prioridad' }  // Baja prioridad
+        ];
+
+        // Agregar marcadores con círculos y popups personalizados
+        locations.forEach(function(location, index) {
+            // Agregar un marcador en cada ubicación
+            var marker = L.marker(location.coords).addTo(map);
+
+            // Asignar el mensaje correspondiente al popup
+            marker.bindPopup(location.message).openPopup();
+
+            // Agregar un círculo alrededor del marcador
+            var circle = L.circle(location.coords, {
+                color: location.color,    // Color del círculo
+                fillColor: location.color,
+                fillOpacity: 0.5,
+                radius: location.radius   // Radio en metros
+            }).addTo(map);
+        });
+
+        // Función para asignar brigada (por ahora solo imprime en la consola)
+        function assignWorker() {
+            var worker = document.getElementById('worker').value;
+            var zone = document.getElementById('zone').value;
+            console.log('Asignado ' + worker + ' a ' + zone);
+            alert(worker + ' ha sido asignado a ' + zone);
+        }
+    </script>
+
+</body>
+</html>
