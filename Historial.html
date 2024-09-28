@@ -19,10 +19,9 @@ mejorando la usabilidad y accesibilidad de la información presentada.
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Luz Alerta - Historial de Emergencias y Estadísticas">
     <title>Historial de Emergencias - Luz Alerta</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Añadir la librería de Chart.js -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+
     <script>
         // Script para filtrar la lista de emergencias registradas
         function filterEmergencies() {
@@ -39,77 +38,101 @@ mejorando la usabilidad y accesibilidad de la información presentada.
 
 <body>
     <header>
-        <nav class="navbar">
-            <h1>Luz Alerta</h1>
-            <h2>Historial de Emergencias y Estadísticas</h2>
-            <ul>
-                <li><a href="#login">Login</a></li>
-                <li><a href="#about">Sobre Nosotros</a></li>
-                <li><a href="#contact">Contacto</a></li>
-            </ul>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <h1 class="navbar-brand">Luz Alerta</h1>
+            <h2 class="navbar-text">Historial de Emergencias y Estadísticas</h2>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="#login">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">Sobre Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
+                </ul>
+            </div>
         </nav>
     </header>
 
-    <section>
-        <h3>Últimas 5 Emergencias Registradas</h3>
-        <input type="text" id="searchInput" placeholder="Buscar emergencia..." onkeyup="filterEmergencies()">
-        <ul id="emergencyList">
-            <li>Apagón en el sector norte - 3 de septiembre, 2024</li>
-            <li>Corte de energía en el centro - 1 de septiembre, 2024</li>
-            <li>Falla en transformador zona sur - 28 de agosto, 2024</li>
-            <li>Problemas en la línea de transmisión - 25 de agosto, 2024</li>
-            <li>Interrupción programada - 20 de agosto, 2024</li>
-        </ul>
-    </section>
+    <main class="container mt-5">
+        <section>
+            <h3>Últimas 5 Emergencias Registradas</h3>
+            <ul class="list-group">
+                <li class="list-group-item">Apagón en el sector norte - 3 de septiembre, 2024</li>
+                <li class="list-group-item">Corte de energía en el centro - 1 de septiembre, 2024</li>
+                <li class="list-group-item">Falla en transformador zona sur - 28 de agosto, 2024</li>
+                <li class="list-group-item">Problemas en la línea de transmisión - 25 de agosto, 2024</li>
+                <li class="list-group-item">Interrupción programada - 20 de agosto, 2024</li>
+            </ul>
+        </section>
 
-    <section>
-        <h3>Estadísticas de Emergencias</h3>
-        <p>A continuación, puedes ver un gráfico con la cantidad de emergencias por sector en el último mes:</p>
+        <section>
+            <h3>Últimas 5 Emergencias Registradas</h3>
+            <input type="text" id="searchInput" placeholder="Buscar emergencia..." onkeyup="filterEmergencies()">
+            <ul id="emergencyList">
+                <li>Apagón en el sector norte - 3 de septiembre, 2024</li>
+                <li>Corte de energía en el centro - 1 de septiembre, 2024</li>
+                <li>Falla en transformador zona sur - 28 de agosto, 2024</li>
+                <li>Problemas en la línea de transmisión - 25 de agosto, 2024</li>
+                <li>Interrupción programada - 20 de agosto, 2024</li>
+            </ul>
+        </section>
 
-        <!-- Aquí irá el gráfico de barras -->
-        <canvas id="emergencyChart" width="400" height="200"></canvas>
 
-        <script>
-            // Configuración del gráfico de barras usando Chart.js
-            var ctx = document.getElementById('emergencyChart').getContext('2d');
-            var emergencyChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Norte', 'Centro', 'Sur', 'Este', 'Oeste'], // Etiquetas para los sectores
-                    datasets: [{
-                        label: 'Número de Emergencias',
-                        data: [5, 3, 7, 2, 4], // Datos de ejemplo para cada sector
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
+        <section class="mt-4">
+            <h3>Estadísticas de Emergencias</h3>
+            <p>A continuación, puedes ver un gráfico con la cantidad de emergencias por sector en el último mes:</p>
+
+            <!-- Aquí irá el gráfico de barras -->
+            <canvas id="emergencyChart" width="400" height="200"></canvas>
+
+            <script>
+                // Configuración del gráfico de barras usando Chart.js
+                var ctx = document.getElementById('emergencyChart').getContext('2d');
+                var emergencyChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Norte', 'Centro', 'Sur', 'Este', 'Oeste'], // Etiquetas para los sectores
+                        datasets: [{
+                            label: 'Número de Emergencias',
+                            data: [5, 3, 7, 2, 4], // Datos de ejemplo para cada sector
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
                         }
                     }
-                }
-            });
-        </script>
-    </section>
+                });
+            </script>
+        </section>
+    </main>
 
-    <footer>
+    <footer class="text-center mt-5">
         <p>© 2024 Luz Alerta. Todos los derechos reservados.</p>
     </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

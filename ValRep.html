@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Validación de Reportes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
     <script>
         function enviarFormularioValidacion(event) {
@@ -31,103 +32,131 @@
 
 <body>
     <header>
-        <nav class="navbar">
-            <h1>Luz Alerta</h1>
-            <ul>
-                <li><a href="#login">Login</a></li>
-                <li><a href="#about">Sobre Nosotros</a></li>
-                <li><a href="#contact">Contacto</a></li>
-            </ul>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Luz Alerta</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">Sobre Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contacto</a>
+                    </li>
+                </ul>
+            </div>
         </nav>
     </header>
 
-    <main>
-        <h1>Formulario de Validación de Reportes</h1>
+    <main class="container mt-5">
+        <h1 class="text-center">Formulario de Validación de Reportes</h1>
         <form id="form-validacion" onsubmit="enviarFormularioValidacion(event)">
-            <form action="/validar_reporte" method="post">
-                </head>
+            <!-- Información del Reporte -->
+            <fieldset class="border p-4 mb-4">
+                <legend class="w-auto">Detalles del Reporte</legend>
+                <div class="form-group">
+                    <label for="id_reporte">ID del Reporte:</label>
+                    <input type="text" id="id_reporte" name="id_reporte" class="form-control" required readonly>
+                </div>
 
-                <body>
-                    <form action="/validar_reporte" method="post">
-                        <!-- Información del Reporte -->
-                        <fieldset>
-                            <legend>Detalles del Reporte</legend>
-                            <label for="id_reporte">ID del Reporte:</label>
-                            <input type="text" id="id_reporte" name="id_reporte" required readonly>
-                            <br><br>
+                <div class="form-group">
+                    <label for="usuario_reportante">Usuario que Reporta:</label>
+                    <input type="text" id="usuario_reportante" name="usuario_reportante" class="form-control" required
+                        readonly>
+                </div>
 
-                            <label for="usuario_reportante">Usuario que Reporta:</label>
-                            <input type="text" id="usuario_reportante" name="usuario_reportante" required readonly>
-                            <br><br>
+                <div class="form-group">
+                    <label for="tipo_problema">Tipo de Problema Reportado:</label>
+                    <input type="text" id="tipo_problema" name="tipo_problema" class="form-control" required readonly>
+                </div>
 
-                            <label for="tipo_problema">Tipo de Problema Reportado:</label>
-                            <input type="text" id="tipo_problema" name="tipo_problema" required readonly>
-                            <br><br>
+                <div class="form-group">
+                    <label for="descripcion_problema">Descripción del Problema:</label>
+                    <textarea id="descripcion_problema" name="descripcion_problema" class="form-control" rows="4"
+                        readonly></textarea>
+                </div>
 
-                            <label for="descripcion_problema">Descripción del Problema:</label>
-                            <textarea id="descripcion_problema" name="descripcion_problema" rows="4" cols="50"
-                                readonly></textarea>
-                            <br><br>
+                <div class="form-group">
+                    <label for="fecha_hora_inicio">Fecha y Hora del Inicio del Problema:</label>
+                    <input type="text" id="fecha_hora_inicio" name="fecha_hora_inicio" class="form-control" required
+                        readonly>
+                </div>
 
-                            <label for="fecha_hora_inicio">Fecha y Hora del Inicio del Problema:</label>
-                            <input type="text" id="fecha_hora_inicio" name="fecha_hora_inicio" required readonly>
-                            <br><br>
+                <div class="form-group">
+                    <label for="afectacion_servicio">Afectación del Servicio:</label>
+                    <input type="text" id="afectacion_servicio" name="afectacion_servicio" class="form-control" required
+                        readonly>
+                </div>
 
-                            <label for="afectacion_servicio">Afectación del Servicio:</label>
-                            <input type="text" id="afectacion_servicio" name="afectacion_servicio" required readonly>
-                            <br><br>
+                <div class="form-group">
+                    <label for="geolocalizacion">Geolocalización:</label>
+                    <input type="text" id="geolocalizacion" name="geolocalizacion" class="form-control" required
+                        readonly>
+                </div>
+            </fieldset>
 
-                            <label for="geolocalizacion">Geolocalización:</label>
-                            <input type="text" id="geolocalizacion" name="geolocalizacion" required readonly>
-                            <br><br>
-                        </fieldset>
+            <!-- Validación del Reporte -->
+            <fieldset class="border p-4 mb-4">
+                <legend class="w-auto">Validación del Reporte</legend>
 
-                        <!-- Validación del Reporte -->
-                        <fieldset>
-                            <legend>Validación del Reporte</legend>
+                <div class="form-group">
+                    <label for="estado_reporte">Estado del Reporte:</label>
+                    <select id="estado_reporte" name="estado_reporte" class="form-control" required>
+                        <option value="pendiente">Pendiente</option>
+                        <option value="aprobado">Aprobado</option>
+                        <option value="rechazado">Rechazado</option>
+                    </select>
+                </div>
 
-                            <label for="estado_reporte">Estado del Reporte:</label>
-                            <select id="estado_reporte" name="estado_reporte" required>
-                                <option value="pendiente">Pendiente</option>
-                                <option value="aprobado">Aprobado</option>
-                                <option value="rechazado">Rechazado</option>
-                            </select>
-                            <br><br>
+                <div class="form-group">
+                    <label for="comentarios_empresa">Comentarios de Validación:</label>
+                    <textarea id="comentarios_empresa" name="comentarios_empresa" class="form-control"
+                        rows="4"></textarea>
+                </div>
 
-                            <label for="comentarios_empresa">Comentarios de Validación:</label>
-                            <textarea id="comentarios_empresa" name="comentarios_empresa" rows="4" cols="50"></textarea>
-                            <br><br>
+                <div class="form-group">
+                    <label for="prioridad_respuesta">Nivel de Prioridad Asignado:</label>
+                    <select id="prioridad_respuesta" name="prioridad_respuesta" class="form-control">
+                        <option value="bajo">Bajo</option>
+                        <option value="medio">Medio</option>
+                        <option value="alto">Alto</option>
+                    </select>
+                </div>
+            </fieldset>
 
-                            <label for="prioridad_respuesta">Nivel de Prioridad Asignado:</label>
-                            <select id="prioridad_respuesta" name="prioridad_respuesta">
-                                <option value="bajo">Bajo</option>
-                                <option value="medio">Medio</option>
-                                <option value="alto">Alto</option>
-                            </select>
-                            <br><br>
-                        </fieldset>
+            <!-- Confirmación -->
+            <fieldset class="border p-4 mb-4">
+                <legend class="w-auto">Confirmación del Responsable</legend>
 
-                        <!-- Confirmación -->
-                        <fieldset>
-                            <legend>Confirmación del Responsable</legend>
+                <div class="form-group">
+                    <label for="validador_nombre">Nombre del Validador:</label>
+                    <input type="text" id="validador_nombre" name="validador_nombre" class="form-control" required>
+                </div>
 
-                            <label for="validador_nombre">Nombre del Validador:</label>
-                            <input type="text" id="validador_nombre" name="validador_nombre" required>
-                            <br><br>
+                <div class="form-group">
+                    <label for="validador_firma">Firma Digital (ID del Validador):</label>
+                    <input type="text" id="validador_firma" name="validador_firma" class="form-control" required>
+                </div>
+            </fieldset>
 
-                            <label for="validador_firma">Firma Digital (ID del Validador):</label>
-                            <input type="text" id="validador_firma" name="validador_firma" required>
-                            <br><br>
-                        </fieldset>
-
-                        <!-- Botón de Envío -->
-                        <button type="submit">Validar Reporte</button>
-                    </form>
+            <!-- Botón de Envío -->
+            <button type="submit" class="btn btn-primary">Validar Reporte</button>
+        </form>
     </main>
 
-    <footer>
+    <footer class="text-center mt-5">
         <p>© 2024 Luz Alerta. Todos los derechos reservados.</p>
     </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

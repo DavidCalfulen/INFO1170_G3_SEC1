@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informe de Situación Actual de Emergencia</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script>
         function enviarFormulario(event) {
             event.preventDefault();
@@ -31,92 +32,125 @@
 
 <body>
     <header>
-        <nav class="navbar">
-            <h1>Luz Alerta</h1>
-            <ul>
-                <li><a href="#login">Inicio</a></li>
-                <li><a href="#about">Quienes somos</a></li>
-                <li><a href="#contact">Contacto</a></li>
-            </ul>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Luz Alerta</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#login">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">Quienes somos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contacto</a>
+                    </li>
+                </ul>
+            </div>
         </nav>
     </header>
 
-    <main>
+    <main class="container mt-5">
         <h1>Informe de Situación Actual de Emergencia</h1>
         <form id="form-emergencia" onsubmit="enviarFormulario(event)" enctype="multipart/form-data">
-            <form action="/informar-situacion" method="POST" enctype="multipart/form-data">
+            <!-- Sección 1: Información del Reporte -->
+            <fieldset class="border p-4 mb-4">
+                <legend class="w-auto">Información del Reporte</legend>
 
-                <!-- Sección 1: Información del Reporte -->
-                <fieldset>
-                    <legend>Información del Reporte</legend>
-
+                <div class="form-group">
                     <label for="id_emergencia">ID de la Emergencia:</label>
-                    <input type="text" id="id_emergencia" name="id_emergencia" required readonly value="123456"><br><br>
+                    <input type="text" class="form-control" id="id_emergencia" name="id_emergencia" required readonly
+                        value="123456">
+                </div>
 
+                <div class="form-group">
                     <label for="fecha_actualizacion">Fecha de Actualización:</label>
-                    <input type="date" id="fecha_actualizacion" name="fecha_actualizacion" required><br><br>
+                    <input type="date" class="form-control" id="fecha_actualizacion" name="fecha_actualizacion"
+                        required>
+                </div>
 
+                <div class="form-group">
                     <label for="hora_actualizacion">Hora de Actualización:</label>
-                    <input type="time" id="hora_actualizacion" name="hora_actualizacion" required><br><br>
+                    <input type="time" class="form-control" id="hora_actualizacion" name="hora_actualizacion" required>
+                </div>
 
+                <div class="form-group">
                     <label for="estado_emergencia">Estado Actual de la Emergencia:</label>
-                    <select id="estado_emergencia" name="estado_emergencia" required>
+                    <select class="form-control" id="estado_emergencia" name="estado_emergencia" required>
                         <option value="">Seleccione el estado actual</option>
                         <option value="en_proceso">En proceso</option>
                         <option value="resuelta">Resuelta</option>
                         <option value="pendiente">Pendiente</option>
                         <option value="suspendida">Suspendida</option>
-                    </select><br><br>
+                    </select>
+                </div>
 
+                <div class="form-group">
                     <label for="tiempo_estimado_solucion">Tiempo Estimado para Solucionar el Problema:</label>
-                    <input type="text" id="tiempo_estimado_solucion" name="tiempo_estimado_solucion"
-                        placeholder="Ej. 2 horas, 1 día" required><br><br>
+                    <input type="text" class="form-control" id="tiempo_estimado_solucion"
+                        name="tiempo_estimado_solucion" placeholder="Ej. 2 horas, 1 día" required>
+                </div>
 
+                <div class="form-group">
                     <label for="tiempo_estimado_llegada">Tiempo Estimado de Llegada a la Emergencia:</label>
-                    <input type="text" id="tiempo_estimado_llegada" name="tiempo_estimado_llegada"
-                        placeholder="Ej. 30 minutos, 2 horas" required><br><br>
-                </fieldset>
+                    <input type="text" class="form-control" id="tiempo_estimado_llegada" name="tiempo_estimado_llegada"
+                        placeholder="Ej. 30 minutos, 2 horas" required>
+                </div>
+            </fieldset>
 
-                <!-- Sección 2: Detalles de la Emergencia -->
-                <fieldset>
-                    <legend>Detalles de la Emergencia</legend>
+            <!-- Sección 2: Detalles de la Emergencia -->
+            <fieldset class="border p-4 mb-4">
+                <legend class="w-auto">Detalles de la Emergencia</legend>
 
-                    <label for="descripcion_actual">Descripción Actual de la Situación:</label><br>
-                    <textarea id="descripcion_actual" name="descripcion_actual" rows="4" cols="50"
+                <div class="form-group">
+                    <label for="descripcion_actual">Descripción Actual de la Situación:</label>
+                    <textarea class="form-control" id="descripcion_actual" name="descripcion_actual" rows="4"
                         placeholder="Describa la situación actual y cualquier cambio en el problema"
-                        required></textarea><br><br>
+                        required></textarea>
+                </div>
 
-                    <label for="acciones_tomadas">Acciones Tomadas:</label><br>
-                    <textarea id="acciones_tomadas" name="acciones_tomadas" rows="4" cols="50"
-                        placeholder="Escriba las acciones que se han tomado hasta el momento"
-                        required></textarea><br><br>
+                <div class="form-group">
+                    <label for="acciones_tomadas">Acciones Tomadas:</label>
+                    <textarea class="form-control" id="acciones_tomadas" name="acciones_tomadas" rows="4"
+                        placeholder="Escriba las acciones que se han tomado hasta el momento" required></textarea>
+                </div>
 
-                    <label for="proximos_pasos">Próximos Pasos Recomendados:</label><br>
-                    <textarea id="proximos_pasos" name="proximos_pasos" rows="4" cols="50"
-                        placeholder="Describa los pasos recomendados para resolver la emergencia"
-                        required></textarea><br><br>
-                </fieldset>
+                <div class="form-group">
+                    <label for="proximos_pasos">Próximos Pasos Recomendados:</label>
+                    <textarea class="form-control" id="proximos_pasos" name="proximos_pasos" rows="4"
+                        placeholder="Describa los pasos recomendados para resolver la emergencia" required></textarea>
+                </div>
+            </fieldset>
 
-                <!-- Sección 3: Confirmación y Evidencia -->
-                <fieldset>
-                    <legend>Confirmación y Evidencia</legend>
+            <!-- Sección 3: Confirmación y Evidencia -->
+            <fieldset class="border p-4 mb-4">
+                <legend class="w-auto">Confirmación y Evidencia</legend>
 
+                <div class="form-group">
                     <label for="evidencia">Adjuntar Imágenes o Videos:</label>
-                    <input type="file" id="evidencia" name="evidencia" accept="image/*, video/*"><br><br>
+                    <input type="file" class="form-control-file" id="evidencia" name="evidencia"
+                        accept="image/*, video/*">
+                </div>
 
-                    <label for="comentarios_adicionales">Comentarios Adicionales:</label><br>
-                    <textarea id="comentarios_adicionales" name="comentarios_adicionales" rows="4" cols="50"
-                        placeholder="Añada cualquier comentario adicional relevante"></textarea><br><br>
-                </fieldset>
+                <div class="form-group">
+                    <label for="comentarios_adicionales">Comentarios Adicionales:</label>
+                    <textarea class="form-control" id="comentarios_adicionales" name="comentarios_adicionales" rows="4"
+                        placeholder="Añada cualquier comentario adicional relevante"></textarea>
+                </div>
+            </fieldset>
 
-                <!-- Botón de envío -->
-                <button type="submit">Enviar Informe</button>
-            </form>
+            <!-- Botón de envío -->
+            <button type="submit" class="btn btn-primary">Enviar Informe</button>
+        </form>
     </main>
 
-    <footer>
+    <footer class="bg-light text-center p-3 mt-5">
         <p>© 2024 Luz Alerta. Todos los derechos reservados.</p>
     </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
