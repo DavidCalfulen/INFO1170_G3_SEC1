@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personajes de Rick and Morty</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        #character-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .character {
+            background-color: white;
+            margin: 10px;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            text-align: center;
+        }
+        .character img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Personajes de Rick and Morty</h1>
+    <button onclick="loadCharacters()">Cargar Personajes</button>
+
+    <!-- Contenedor donde se mostrará la lista de personajes -->
+    <ul id="character-list"></ul>
+
+    <script>
+        function loadCharacters() {
+            // Realizar la solicitud a la API pública de Rick and Morty usando fetch
+            fetch('https://rickandmortyapi.com/api/character')
+                .then(response => response.json()) // Convertimos la respuesta a JSON
+                .then(data => {
+                    const characterList = document.getElementById('character-list');
+                    characterList.innerHTML = ''; // Limpiar cualquier contenido previo
+
+                    // Recorremos los datos de los personajes y los agregamos al HTML
+                    data.results.forEach(character => {
+                        const characterItem = document.createElement('li');
+                        characterItem.classList.add('character');
+                        characterItem.innerHTML = `
+                            <img src="${character.image}" alt="${character.name}">
+                            <strong>${character.name}</strong><br>
+                            <p>${character.status} - ${character.species}</p>
+                        `;
+                        characterList.appendChild(characterItem);
+                    });
+                })
+                .catch(error => console.error('Error al cargar los personajes:', error));
+        }
+    </script>
+
+</body>
+</html>

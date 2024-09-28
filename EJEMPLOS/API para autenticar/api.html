@@ -1,0 +1,87 @@
+<!-- Una API (Interfaz de Programación de Aplicaciones) es un conjunto de reglas que permite la comunicación entre 
+aplicaciones. En este ejemplo, utilize Firebase Authentication, una API que facilita la autenticación de usuarios a 
+través de diferentes métodos, como correo y contraseña, Google y Facebook.
+
+El proceso de autenticación incluye el registro y el inicio de sesión de usuarios, donde Firebase gestiona la creación 
+y verificación de cuentas de manera segura. La integración con Google y Facebook permite a los usuarios iniciar sesión
+usando sus cuentas de estas plataformas, facilitando el acceso a la aplicacion. -->
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autenticación Luz Alerta</title>
+</head>
+<body>
+    <h2>Iniciar sesión en Luz Alerta</h2>
+
+    <form id="loginForm">
+        <input type="email" id="email" placeholder="Correo electrónico" required><br>
+        <input type="password" id="password" placeholder="Contraseña" required><br>
+        <button type="submit">Iniciar Sesión</button>
+    </form>
+
+    <h2>¿No tienes cuenta? Regístrate aquí</h2>
+
+    <form id="registerForm">
+        <input type="email" id="regEmail" placeholder="Correo electrónico" required><br>
+        <input type="password" id="regPassword" placeholder="Contraseña" required><br>
+        <button type="submit">Registrarse</button>
+    </form>
+
+    <p id="message"></p>
+
+    <script type="module">
+        // Importar las funciones necesarias desde Firebase SDK
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+
+        // Configuración de tu app de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBobT4u54bm6_wNhwUb6k1RbIxyzVVs6rM",
+            authDomain: "luzalerta-ee60c.firebaseapp.com",
+            projectId: "luzalerta-ee60c",
+            storageBucket: "luzalerta-ee60c.appspot.com",
+            messagingSenderId: "297148355177",
+            appId: "1:297148355177:web:d514d99dda84d42bc7c8f8",
+            measurementId: "G-BG710X8TXL"
+        };
+
+        // Inicializa Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Manejar el inicio de sesión
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    document.getElementById('message').innerText = 'Inicio de sesión exitoso';
+                })
+                .catch((error) => {
+                    document.getElementById('message').innerText = 'Error al iniciar sesión: ' + error.message;
+                });
+        });
+
+        // Manejar el registro
+        document.getElementById('registerForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    document.getElementById('message').innerText = 'Registro exitoso';
+                })
+                .catch((error) => {
+                    document.getElementById('message').innerText = 'Error al registrarse: ' + error.message;
+                });
+        });
+    </script>
+</body>
+</html>

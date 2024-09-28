@@ -1,3 +1,15 @@
+<!-- 
+Descripción del código:
+Este código HTML crea una página web con diferentes secciones que presentan información sobre la misión, objetivos y métodos. 
+El código incluye un script que mejora la interactividad visual, resaltando los títulos de las secciones (`h3`) 
+cuando el usuario pasa el cursor sobre ellos. 
+El color de fondo del título cambia temporalmente y regresa a su estado original cuando el cursor se retira. 
+El cambio de color tiene una transición suave para mejorar la experiencia del usuario.
+Además, la página cuenta con una barra de navegación, varias secciones de contenido organizadas con encabezados, y un pie 
+de página básico.
+-->
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -6,7 +18,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Luz Alerta - Optimización de la respuesta ante apagones eléctricos">
     <title>¿Quiénes Somos? - Luz Alerta</title>
+<<<<<<< HEAD
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+=======
+    <link rel="stylesheet" href="styles.css">
+    
+    <script>
+        // Resaltar el título de las secciones cuando el usuario pasa el cursor sobre ellos
+        document.addEventListener('DOMContentLoaded', function () {
+            var headers = document.querySelectorAll('section h3');
+            
+            headers.forEach(function (header) {
+                // Cuando el ratón esté sobre el título
+                header.addEventListener('mouseover', function () {
+                    header.style.backgroundColor = '#f0e68c';  // Cambia el color de fondo
+                    header.style.transition = 'background-color 0.4s ease'; // Suaviza el cambio
+                });
+                
+                // Cuando el ratón salga del título
+                header.addEventListener('mouseout', function () {
+                    header.style.backgroundColor = '';  // Vuelve al color original
+                });
+            });
+        });
+    </script>
+>>>>>>> 5a2bb39ff82a83f8eae5be319a8b3893e1262b8e
 </head>
 
 <body>
@@ -28,6 +64,7 @@
         </nav>
     </header>
 
+<<<<<<< HEAD
     <main class="container mt-5">
         <section>
             <h3>Nuestra Misión</h3>
@@ -110,6 +147,55 @@
             </ul>
         </section>
     </main>
+=======
+    <section>
+        <h3>Nuestra Misión</h3>
+        <div class="box">
+            <p>En <strong>Luz Alerta</strong>, creemos que la electricidad es esencial para la vida diaria y que nadie
+                debería sufrir largos apagones, especialmente durante emergencias...</p>
+        </div>
+    </section>
+
+    <section>
+        <h3>¿Por Qué lo Hacemos?</h3>
+        <div class="box">
+            <p>Recientemente, un temporal expuso las debilidades del sistema eléctrico actual...</p>
+        </div>
+    </section>
+
+    <section>
+        <h3>Nuestros Objetivos</h3>
+        <ul>
+            <li><strong>Reducir los Tiempos de Apagones:</strong> Implementando tecnologías avanzadas...</li>
+            <li><strong>Mejorar la Comunicación:</strong> Crear un canal directo y transparente...</li>
+            <li><strong>Fomentar la Participación de la Comunidad:</strong> Involucrar a los usuarios...</li>
+            <li><strong>Minimizar el Impacto en la Vida Cotidiana:</strong> Asegurar que tanto personas como empresas...</li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>¿Qué Esperamos Lograr?</h3>
+        <div class="box">
+            <p><strong>Respuesta Rápida y Eficiente:</strong> Gracias a un sistema automatizado de reportes...</p>
+        </div>
+        <div class="box">
+            <p><strong>Transparencia y Confianza:</strong> Los usuarios tendrán acceso a un mapa interactivo...</p>
+        </div>
+        <div class="box">
+            <p><strong>Comunidades Resilientes:</strong> Al reducir los tiempos de apagón y mejorar la gestión...</p>
+        </div>
+    </section>
+
+    <section id="objetivos">
+        <h3>¿Cómo lo Logramos?</h3>
+        <ul>
+            <li><strong>Plataforma Tecnológica Avanzada:</strong> Desarrollamos una página web interactiva...</li>
+            <li><strong>Mapa Interactivo:</strong> Utilizamos herramientas como OpenStreetMap...</li>
+            <li><strong>Gestión Eficiente de Recursos:</strong> Con datos precisos y análisis predictivo...</li>
+            <li><strong>Comunicación Proactiva:</strong> Enviamos notificaciones y actualizaciones constantes...</li>
+        </ul>
+    </section>
+>>>>>>> 5a2bb39ff82a83f8eae5be319a8b3893e1262b8e
 
     <footer class="text-center mt-5">
         <p>© 2024 Luz Alerta - Todos los derechos reservados.</p>
