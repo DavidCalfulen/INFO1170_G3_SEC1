@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Registro</title>
+</head>
+<body>
+    <div class="registro">
+        <h2>Registro</h2>
+
+        <!-- Inicia el formulario -->
+        <form action="registro.php" method="POST">
+            <!-- Nombre Completo -->
+            <label for="nombre">Nombre Completo:</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Ej: Juan Diego Pérez Díaz" required>
+
+            <!-- Correo Electrónico -->
+            <label for="correo">Correo Electrónico:</label>
+            <input type="email" id="correo" name="correo" placeholder="Ej: correo@gmail.com" required>
+
+            <!-- RUT -->
+            <label for="rut">RUT:</label>
+            <input type="text" id="rut" name="rut" placeholder="Ej: 12.345.678-9" pattern="^(\d{1,2}\.\d{3}\.\d{3}-[\dkK])$" required>
+
+            <!-- Número de Cliente -->
+            <label for="numero_cliente">Número de Cliente:</label>
+            <input type="text" id="numero_cliente" name="numero_cliente" placeholder="Ej: 1234567890" pattern="\d+" minlength="5" maxlength="15" required>
+
+            <!-- Nombre Empresa -->
+            <label for="empresa">Nombre Empresa:</label>
+            <input type="text" id="empresa" name="empresa" placeholder="Ej: CGE" required>
+
+            <!-- Contraseña -->
+            <label for="contraseña">Contraseña:</label>
+            <input type="password" id="contraseña" name="contraseña" placeholder="Ingrese su contraseña" required>
+
+            <!-- Botón de envío -->
+            <button type="button" onclick="">Registrarse</button>
+        </form>
+
+    </div>
+</body>
+</html>
