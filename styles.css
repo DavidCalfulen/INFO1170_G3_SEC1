@@ -1,91 +1,143 @@
 /* Estilos generales */
 body {
     background-color: #f8f9fa;
-    /* Color de fondo claro */
     font-family: Arial, sans-serif;
-    /* Fuente general */
+}
+
+h1,
+h2 {
+    color: #343a40;
 }
 
 h1 {
-    color: #343a40;
-    /* Color del encabezado */
     margin-bottom: 20px;
-    /* Espacio inferior del encabezado */
 }
 
 h2 {
-    color: #343a40;
-    /* Color del segundo encabezado */
     margin-bottom: 15px;
-    /* Espacio inferior del segundo encabezado */
 }
 
 /* Estilos para listas */
 .list-group-item {
     background-color: #ffffff;
-    /* Fondo blanco para los elementos de la lista */
     border: 1px solid #dee2e6;
-    /* Borde ligero */
 }
 
 .list-group-item a {
     color: #007bff;
-    /* Color de los enlaces */
     text-decoration: none;
-    /* Sin subrayado */
 }
 
 .list-group-item a:hover {
     color: #0056b3;
-    /* Color al pasar el mouse */
 }
 
 /* Estilos para formularios */
 .form-label {
     font-weight: bold;
-    /* Negrita para las etiquetas */
 }
 
 .form-control {
     border: 1px solid #ced4da;
-    /* Borde para campos de texto */
 }
 
 .form-control:focus {
     border-color: #80bdff;
-    /* Color del borde al enfocarse */
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-    /* Sombra al enfocarse */
 }
 
 /* Estilos para botones */
 .btn-primary {
     background-color: #007bff;
-    /* Color del botón */
     border: none;
-    /* Sin borde */
 }
 
 .btn-primary:hover {
     background-color: #0056b3;
-    /* Color al pasar el mouse sobre el botón */
 }
 
 /* Espaciado y márgenes */
 .my-4 {
     margin-top: 2rem;
-    /* Margen superior */
     margin-bottom: 2rem;
-    /* Margen inferior */
 }
 
 .mb-3 {
     margin-bottom: 1rem;
-    /* Margen inferior en formularios */
 }
 
 /* Contenedor principal */
 .container {
     margin-top: 20px;
-    /* Margen superior para el contenedor */
+}
+
+#searchInput {
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+#emergencyList li {
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+/* Diseño responsivo */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.75rem;
+        margin-bottom: 15px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    #searchInput {
+        width: 100%;
+        padding: 8px;
+    }
+
+    #emergencyList li {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    h1 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+        margin-bottom: 8px;
+    }
+
+    #searchInput {
+        font-size: 0.9rem;
+        padding: 6px;
+    }
+
+    #emergencyList li {
+        font-size: 0.8rem;
+        padding: 6px;
+    }
+
+    .btn-primary {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
 }

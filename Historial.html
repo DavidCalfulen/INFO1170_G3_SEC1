@@ -1,16 +1,3 @@
-<!-- 
-Descripción del código:
-Este código HTML crea una página web que muestra un historial de emergencias y estadísticas relacionadas con 
-cortes de energía. 
-Incorpora la librería Chart.js para visualizar los datos en un gráfico de barras. 
-El gráfico muestra la cantidad de emergencias por sector en el último mes, con diferentes colores para cada barra.
-Además, se incluye un campo de búsqueda que permite al usuario filtrar las últimas emergencias registradas por texto 
-ingresado. 
-Cuando el usuario escribe en el campo de búsqueda, la lista se actualiza para mostrar solo las emergencias que contienen 
-el texto buscado, 
-mejorando la usabilidad y accesibilidad de la información presentada.
--->
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -22,35 +9,31 @@ mejorando la usabilidad y accesibilidad de la información presentada.
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <script>
-        // Script para filtrar la lista de emergencias registradas
-        function filterEmergencies() {
-            const input = document.getElementById('searchInput').value.toLowerCase(); // Obtener valor de búsqueda
-            const items = document.querySelectorAll('#emergencyList li'); // Seleccionar todos los elementos de la lista
-
-            items.forEach(item => {
-                const text = item.textContent.toLowerCase(); // Obtener texto del elemento
-                item.style.display = text.includes(input) ? '' : 'none'; // Mostrar u ocultar según el filtro
-            });
-        }
-    </script>
 </head>
 
 <body>
     <header>
+        <!-- NAVBAR AJUSTADO -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <h1 class="navbar-brand">Luz Alerta</h1>
-            <h2 class="navbar-text">Historial de Emergencias y Estadísticas</h2>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="#login">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">Sobre Nosotros</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
-                </ul>
+            <div class="container">
+                <a class="navbar-brand" href="#">Luz Alerta</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#inicio">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">¿Quiénes somos?</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>
@@ -58,7 +41,9 @@ mejorando la usabilidad y accesibilidad de la información presentada.
     <main class="container mt-5">
         <section>
             <h3>Últimas 5 Emergencias Registradas</h3>
-            <ul class="list-group">
+            <input type="text" id="searchInput" class="form-control" placeholder="Buscar emergencia..."
+                onkeyup="filterEmergencies()">
+            <ul id="emergencyList" class="list-group mt-3">
                 <li class="list-group-item">Apagón en el sector norte - 3 de septiembre, 2024</li>
                 <li class="list-group-item">Corte de energía en el centro - 1 de septiembre, 2024</li>
                 <li class="list-group-item">Falla en transformador zona sur - 28 de agosto, 2024</li>
@@ -66,19 +51,6 @@ mejorando la usabilidad y accesibilidad de la información presentada.
                 <li class="list-group-item">Interrupción programada - 20 de agosto, 2024</li>
             </ul>
         </section>
-
-        <section>
-            <h3>Últimas 5 Emergencias Registradas</h3>
-            <input type="text" id="searchInput" placeholder="Buscar emergencia..." onkeyup="filterEmergencies()">
-            <ul id="emergencyList">
-                <li>Apagón en el sector norte - 3 de septiembre, 2024</li>
-                <li>Corte de energía en el centro - 1 de septiembre, 2024</li>
-                <li>Falla en transformador zona sur - 28 de agosto, 2024</li>
-                <li>Problemas en la línea de transmisión - 25 de agosto, 2024</li>
-                <li>Interrupción programada - 20 de agosto, 2024</li>
-            </ul>
-        </section>
-
 
         <section class="mt-4">
             <h3>Estadísticas de Emergencias</h3>
