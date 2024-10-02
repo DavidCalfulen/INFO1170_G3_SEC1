@@ -36,7 +36,6 @@ main{
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     background-color: rgba(0, 128, 255, 0.5);
-
 }
 
 .caja__trasera div{
@@ -44,7 +43,6 @@ main{
     color: white;
     transition: all 500ms;
 }
-
 
 .caja__trasera div p,
 .caja__trasera button{
@@ -76,6 +74,13 @@ main{
 .caja__trasera button:hover{
     background: #fff;
     color: #46A2FD;
+    transform: scale(1.1); /* Efecto de agrandar el botón */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra en hover */
+}
+
+.caja__trasera button:active{
+    transform: scale(0.95); /* Efecto al presionar */
+    background-color: #003d80; /* Cambio de color al hacer clic */
 }
 
 /*Formularios*/
@@ -88,8 +93,6 @@ main{
     position: relative;
     top: -185px;
     left: 10px;
-
-    /*La transicion va despues del codigo JS*/
     transition: left 500ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
 }
 
@@ -128,20 +131,28 @@ main{
     cursor: pointer;
     color: white;
     outline: none;
+    transition: all 0.3s ease;
 }
 
+.contenedor__login-register form button:hover{
+    background-color: #0056b3; /* Cambia a un color más oscuro */
+    transform: scale(1.1); /* Efecto de agrandamiento */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Añade sombra suave */
+}
 
-
+.contenedor__login-register form button:active{
+    transform: scale(0.95); /* Efecto de reducir tamaño al hacer clic */
+    background-color: #003d80; /* Color más oscuro al hacer clic */
+}
 
 .formulario__login{
     opacity: 1;
     display: block;
 }
+
 .formulario__register{
     display: none;
 }
-
-
 
 @media screen and (max-width: 850px){
 
@@ -161,9 +172,6 @@ main{
         position: absolute;
     }
 
-
-    /*Formularios*/
-
     .contenedor__login-register{
         top: -10px;
         left: -5px;
@@ -172,5 +180,46 @@ main{
 
     .contenedor__login-register form{
         position: relative;
+    }
+}
+
+/* Estilo base para los botones */
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: pulse 2s infinite; /* Añade una animación continua */
+}
+
+/* Efecto hover y click */
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    transform: scale(0.95);
+    background-color: #003d80;
+}
+
+/* Definición de la animación pulse */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(0, 123, 255, 0.7);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
     }
 }
