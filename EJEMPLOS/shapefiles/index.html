@@ -1,3 +1,27 @@
+<!--En este tutorial, trabajé en la creación de un mapa interactivo utilizando QGIS, Leaflet, y datos geoespaciales
+en formato GeoJSON. Aquí están los pasos clave que seguí:
+
+Shapefiles y QGIS: Comencé trabajando con un archivo Shapefile en QGIS para visualizar y filtrar la comuna de Temuco. 
+Fragmenté la comuna en zonas de prioridad (alta, media, baja) y utilicé herramientas de edición como "Cortar" y 
+"Mover vértices" para crear las áreas sin superponer polígonos. Activé la opción Snapping para evitar solapamientos 
+mientras dibujaba los polígonos.
+
+Fusionar capas: Después de crear los polígonos por prioridad, combiné las capas de alta, media y baja prioridad 
+utilizando la herramienta de "Unir capas" (Union). Luego, configuré la simbología categorizada para aplicar colores 
+(rojo, naranja, amarillo) basados en los valores de prioridad.
+
+Exportación a GeoJSON: Para integrar el mapa en una página web, exporté la capa combinada a GeoJSON. Aseguré que el 
+sistema de referencia de coordenadas (CRS) fuera EPSG:4326 y corregí cualquier problema de geometría con la herramienta 
+"Reparar geometrías" en QGIS.
+
+Integración con Leaflet y OSM: Finalmente, utilicé Leaflet y OpenStreetMap (OSM) para mostrar el mapa en la web. Cargué 
+el archivo GeoJSON en Leaflet, aplicando estilos según la prioridad de cada zona. Probé el mapa en un servidor local 
+para asegurarme de que las zonas de prioridad se visualizaran correctamente.
+
+Así logré crear un mapa interactivo que muestra claramente las zonas de prioridad en diferentes colores y se integra 
+perfectamente en mi sitio web. -->
+
+
 <!DOCTYPE html>
 <html>
 <head>
