@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mapa de Prioridades</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+</head>
+<body>
+    <div id="map" style="width: 100%; height: 600px;"></div>
+    <script>
+        var map = L.map('map').setView([-38.73965, -72.59842], 12);  // Coordenadas centradas en Temuco
+        
+        // Capa base de OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        
+        // Cargar el archivo GeoJSON con las zonas de prioridad
+        fetch('Prioridades.geojson')
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    style: function(feature) {
+                        switch (feature.properties.prioridad) {
+                            case 'alta': return {color: "red"};
+                            case 'media': return {color: "orange"};
+                            case 'baja': return {color: "yellow"};
+                        }
+                    }
+                }).addTo(map);
+            });
+    </script>
+</body>
+</html>
