@@ -34,6 +34,16 @@
                     <input type="email" name="correo_electronico" placeholder="Correo Electrónico" required>
                     <input type="password" name="contrasena" placeholder="Contraseña" required>
                     <button type="submit">Entrar</button>
+                
+
+
+                   <!-- Selector para el tipo de cuenta -->
+                   <select name="tipo_cuenta" required>
+                    <option value="usuario">Usuario</option>
+                    <option value="empresa">Empresa</option>
+                </select>
+                
+                 
                 </form>
 
                 <!-- Register -->
@@ -42,12 +52,9 @@
                     <input type="text" name="nombre_completo" placeholder="Nombre completo" required>
                     <input type="email" name="correo_electronico" placeholder="Correo Electrónico" required>
                     <input type="password" name="contrasena" placeholder="Contraseña" required>
-
-                    <!-- Selector para el tipo de cuenta -->
-                    <select name="tipo_cuenta" required>
-                        <option value="usuario">Usuario</option>
-                        <option value="empresa">Empresa</option>
-                    </select>
+                    <input type="text" name="Rut" placeholder="Rut" required
+                    pattern="\d{8}-\d{1}"
+                    title="El rut debe tener 8 digitos, seguido de un guion y un digito verificador">
                     
                     <button type="submit">Registrarse</button>
                 </form>
