@@ -1,0 +1,56 @@
+GeoServer es una plataforma de servidor de código abierto diseñada para publicar, gestionar y compartir datos geoespaciales
+ en la web. Está escrito en Java y permite a los usuarios acceder, editar y visualizar datos geográficos a través de protocolos 
+ estándar como WMS (Web Map Service), WFS (Web Feature Service) y WCS (Web Coverage Service).
+
+Características principales:
+Publicación de datos espaciales: GeoServer permite publicar datos de múltiples formatos como shapefiles, bases de datos espaciales 
+(PostGIS, Oracle Spatial) y archivos raster (GeoTIFF, JPEG).
+
+Soporte de estándares OGC: Compatible con estándares del Open Geospatial Consortium (OGC), lo que asegura la interoperabilidad con otros 
+sistemas y aplicaciones geoespaciales.
+
+Visualización interactiva: A través de herramientas como OpenLayers o Leaflet, GeoServer facilita la visualización de mapas en la web, 
+permitiendo la interacción con los datos.
+
+Edición de datos geoespaciales: Además de la visualización, GeoServer permite la edición de datos directamente desde el servidor, 
+utilizando estándares como WFS-T (transaccional).
+
+Escalabilidad y rendimiento: GeoServer puede manejar grandes volúmenes de datos geoespaciales y es extensible a través de plugins y 
+configuraciones personalizadas.
+
+GeoServer es ideal para quienes desean gestionar grandes cantidades de datos espaciales y crear mapas interactivos que se pueden 
+acceder y compartir en plataformas web.
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+Paso 1: Configuración básica de GeoServer
+
+Instalación: Descarga e instala GeoServer desde su sitio oficial, geoserver.org.
+
+Acceso a la interfaz: Después de la instalación, accede a GeoServer a través del navegador (normalmente en http://localhost:8080/geoserver).
+
+Iniciar sesión: Ingresa con el usuario y contraseña predeterminados (admin, geoserver).
+
+Paso 2: Publicar un Shapefile
+
+Crear un Almacén de Datos (Data Store):
+
+En la interfaz de GeoServer, ve a "Data" → "Stores" → "Add a new store".
+Elige el tipo de almacén Shapefile (vectorial).
+Asigna un nombre y selecciona el archivo .shp desde tu sistema.
+Guarda los cambios.
+
+Crear una capa:
+Una vez que el almacén de datos esté configurado, crea una nueva capa seleccionando el archivo que subiste.
+Haz clic en "Publish" (Publicar) para hacer visible esta capa.
+Configura los parámetros, como el estilo de visualización y el sistema de referencia espacial (CRS). Por ejemplo, 
+usa EPSG:4326 para coordenadas geográficas.
+Guarda los cambios.
+
+Paso 3: Visualizar la capa en un mapa web
+Previsualización:
+
+Ve a "Layers" → selecciona tu capa publicada → haz clic en "Layer Preview".
+Selecciona el formato OpenLayers para ver tu capa en un mapa interactivo directamente en el navegador.
+Integración con un mapa web (usando OpenLayers): Si deseas integrar tu capa en un sitio web, puedes usar un visor de mapas como OpenLayers.
+Revisa el ejemplo en el siguiente archivo siguiendo los pasos anteriores.
