@@ -1,0 +1,105 @@
+1. Crear el campo de búsqueda (input):
+
+Este es el lugar donde el usuario escribirá lo que quiere buscar.
+Usamos un evento onkeyup para que cada vez que el usuario teclee algo, la búsqueda se actualice en tiempo real.
+
+<input type="text" id="searchInput" onkeyup="filterPage()" placeholder="Buscar en la página..." />
+
+2. Crear las secciones que se van a filtrar:
+
+Estas son las partes de la página (como textos o bloques de contenido) que queremos mostrar u ocultar dependiendo del filtro.
+A cada sección le damos una clase, como section, para poder seleccionarlas y filtrarlas con JavaScript.
+
+<div class="section">
+    <h3>Sección 1: Introducción</h3>
+    <p>Esta es la introducción de nuestra página. Aquí explicamos los objetivos principales.</p>
+</div>
+
+3. Crear la función filterPage() en JavaScript:
+
+Esta función obtiene el valor que el usuario escribió en el campo de búsqueda.
+Luego, recorre todas las secciones y las muestra u oculta dependiendo de si el texto de la sección contiene la palabra escrita por el usuario.
+
+<script>
+    function filterPage() {
+        // Obtiene el valor del campo de búsqueda
+        let input = document.getElementById('searchInput');
+        let filter = input.value.toLowerCase();
+        
+        // Obtiene todas las secciones con la clase "section"
+        let sections = document.getElementsByClassName('section');
+
+        // Recorre cada sección y verifica si contiene el texto buscado
+        for (let i = 0; i < sections.length; i++) {
+            let section = sections[i];
+            let text = section.textContent || section.innerText;
+            
+            // Muestra la sección si contiene el texto buscado, de lo contrario la oculta
+            if (text.toLowerCase().indexOf(filter) > -1) {
+                section.style.display = "";
+            } else {
+                section.style.display = "none";
+            }
+        }
+    }
+</script>
+
+4. Código del filtro de búsqueda (solo la parte del filtro):
+
+<!-- Campo de búsqueda -->
+<input type="text" id="searchInput" onkeyup="filterPage()" placeholder="Buscar en la página..." />
+
+<!-- Secciones de la página -->
+<div class="section">
+    <h3>Sección 1: Introducción</h3>
+    <p>Esta es la introducción de nuestra página. Aquí explicamos los objetivos principales.</p>
+</div>
+
+<div class="section">
+    <h3>Sección 2: Características</h3>
+    <p>Nuestro sistema ofrece una variedad de características innovadoras para optimizar la respuesta ante apagones.</p>
+</div>
+
+<div class="section">
+    <h3>Sección 3: Beneficios</h3>
+    <p>El uso de nuestro sistema permite a las compañías eléctricas responder de manera más rápida y eficiente.</p>
+</div>
+
+<div class="section">
+    <h3>Sección 4: Contacto</h3>
+    <p>Puedes ponerte en contacto con nosotros a través de nuestro correo o redes sociales.</p>
+</div>
+
+<!-- Función de JavaScript para filtrar las secciones -->
+<script>
+    function filterPage() {
+        // Obtiene el valor del campo de búsqueda
+        let input = document.getElementById('searchInput');
+        let filter = input.value.toLowerCase();
+        
+        // Obtiene todas las secciones con la clase "section"
+        let sections = document.getElementsByClassName('section');
+
+        // Recorre cada sección y verifica si contiene el texto buscado
+        for (let i = 0; i < sections.length; i++) {
+            let section = sections[i];
+            let text = section.textContent || section.innerText;
+            
+            // Muestra la sección si contiene el texto buscado, de lo contrario la oculta
+            if (text.toLowerCase().indexOf(filter) > -1) {
+                section.style.display = "";
+            } else {
+                section.style.display = "none";
+            }
+        }
+    }
+</script>
+
+5. Resumen
+
+Campo de búsqueda: Permite al usuario ingresar el texto que se utilizará para buscar.
+Secciones a filtrar: Son las secciones que se van a mostrar u ocultar.
+Función filterPage(): Compara el texto ingresado con el contenido de las secciones y las oculta o muestra dependiendo de si el texto coincide.
+Este filtro básico permite al usuario encontrar contenido rápidamente en la página. Si quieres añadir más funcionalidad, como filtrar tablas o listas, se puede expandir fácilmente.
+
+
