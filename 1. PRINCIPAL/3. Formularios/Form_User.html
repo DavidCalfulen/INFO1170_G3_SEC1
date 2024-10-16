@@ -6,32 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Reporte de Incidencias</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script>
-        function enviarFormularioReporte(event) {
-            event.preventDefault();
-
-            const formData = new FormData(event.target);
-
-            fetch('/enviar_reporte', {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Formulario enviado', data);
-                    alert('Reporte enviado correctamente');
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Hubo un problema al enviar el reporte');
-                });
-        }
-    </script>
 </head>
 
 <body>
     <header>
-        <!-- NAVBAR AJUSTADO -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
                 <a class="navbar-brand" href="#">Luz Alerta</a>
@@ -58,7 +36,7 @@
 
     <main class="container mt-5">
         <h1 class="text-center">Formulario de Reporte de Incidencias</h1>
-        <form id="form-reporte" onsubmit="enviarFormularioReporte(event)" enctype="multipart/form-data">
+        <form id="form-reporte" enctype="multipart/form-data">
             <fieldset class="border p-4 mb-4">
                 <legend class="w-auto">Descripción de la Incidencia</legend>
                 <div class="form-group">
@@ -129,7 +107,10 @@
                 </div>
             </fieldset>
 
-            <button type="submit" class="btn btn-primary">Enviar Reporte</button>
+            <!-- Botón con enlace que redirige directamente usando ruta relativa -->
+            <a href="../5.%20Updates/update_usuario.html" class="btn btn-primary">
+                Enviar Reporte
+            </a>
         </form>
     </main>
 
