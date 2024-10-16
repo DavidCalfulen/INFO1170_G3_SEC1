@@ -1,126 +1,136 @@
+<!-- 
+Descripción del Proyecto:
+Este proyecto utiliza Leaflet para crear un mapa interactivo centrado en Temuco, donde se visualizan zonas de prioridad 
+según su importancia (alta, media, baja) utilizando datos GeoJSON. 
+
+Además, se colocan íconos personalizados (hospitales y emergencias) en ubicaciones específicas dentro de las zonas 
+de alta prioridad. Al hacer clic en estos íconos, se muestra un gráfico interactivo con datos relevantes utilizando 
+Chart.js. 
+
+El objetivo del proyecto es mostrar información dinámica sobre la infraestructura en Temuco mediante un mapa sencillo 
+y visualmente claro. 
+-->
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <title>Mapa de Prioridades</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Cargar estilos y scripts necesarios para Leaflet y Chart.js -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
-        #map { width: 100%; height: 600px; }
-        .chart-popup {
-            width: 300px;
-            height: 300px;
-        }
-        .chart-container {
-            width: 100%;
-            height: 100%;
-        }
+        /* Estilo del contenedor del mapa */
+        #map { width: 100%; height: 600px; } 
+
+        /* Estilo de los popups con gráficos */
+        .chart-popup { width: 300px; height: 300px; } 
+        .chart-container { width: 100%; height: 100%; }
     </style>
 </head>
 <body>
-    <div id="map"></div> <!-- Contenedor del mapa -->
+    <!-- Contenedor donde se renderiza el mapa -->
+    <div id="map"></div> 
 
     <script>
         // Inicializa el mapa centrado en Temuco con un nivel de zoom de 12
-        var map = L.map('map').setView([-38.73965, -72.59842], 12);
+        const map = L.map('map').setView([-38.73965, -72.59842], 12);
 
-        // Capa base de OpenStreetMap
+        // Agrega la capa base del mapa usando OpenStreetMap
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Cargar el archivo GeoJSON con las zonas de prioridad
+        // Cargar las zonas de prioridad desde un archivo GeoJSON externo
         fetch('Prioridades.geojson')
-            .then(response => response.json())
+            .then(response => response.json())  // Convertir la respuesta a JSON
             .then(data => {
+                // Agregar las zonas de prioridad al mapa
                 L.geoJSON(data, {
-                    style: function(feature) {
-                        // Estilo de cada zona basado en la prioridad
-                        switch (feature.properties.prioridad) {
-                            case 'alta': return {color: "red"};
-                            case 'media': return {color: "orange"};
-                            case 'baja': return {color: "yellow"};
-                        }
-                    }
-                }).addTo(map);
+                    style: feature => ({
+                        // Asignar colores según la prioridad
+                        color: feature.properties.prioridad === 'alta' ? 'red' :
+                               feature.properties.prioridad === 'media' ? 'orange' : 'green'
+                    })
+                }).addTo(map);  // Añadir las zonas al mapa
             });
 
-        // Datos para los gráficos en los íconos
-        var chartData = {
-            'AvAlemania': {
-                labels: ['Hospitales', 'Alta población', 'Comercio', 'Serv. Emergencias'],
-                data: [55, 10 , 15 ,20 ],
-                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#00C040']
-            },
-            'Centro': {
-                labels: ['Hospitales', 'Alta poblacion', 'Comercio', 'Serv. Emergencias'],
-                data: [10, 20, 30, 40],
-                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#00C040']
-            }
+        // Datos para los gráficos asociados a cada ícono
+        const chartData = {
+            'AvAlemania': { labels: ['Hospitales', 'Alta población', 'Comercio', 'Serv. Emergencias'], data: [55, 10, 15, 20] },
+            'Centro': { labels: ['Hospitales', 'Alta población', 'Comercio', 'Serv. Emergencias'], data: [10, 20, 30, 40] },
+            'AvBarros': { labels: ['Hospitales', 'Alta población', 'Comercio', 'Serv. Emergencias'], data: [0, 10, 20, 70] },
+            'Venecia': { labels: ['Hospitales', 'Alta población', 'Comercio', 'Serv. Emergencias'], data: [50, 50, 0, 0] },
+            'PedroValdivia': { labels: ['Hospitales', 'Alta población', 'Comercio', 'Serv. Emergencias'], data: [70, 30, 0, 0] },
+            'FundoCarmen': { labels: ['Hospitales', 'Alta población', 'Comercio', 'Serv. Emergencias'], data: [40, 20, 0, 40] },
+            'labranza': { labels: ['Hospitales', 'Alta población', 'Comercio', 'Serv. Emergencias'], data: [45, 5, 5, 45] }
         };
 
-        // Función para mostrar gráficos en los popups
+        // Definición de los íconos personalizados
+        const icons = {
+            Hospital: L.icon({ iconUrl: '../../2. CSS/medicamento.png', iconSize: [22, 22], iconAnchor: [16, 32] }),
+            Emergencia: L.icon({ iconUrl: '../../2. CSS/policia.png', iconSize: [22, 22], iconAnchor: [16, 32] })
+        };
+
+        // Lista de marcadores con sus coordenadas y tipo de ícono
+        const markers = [
+            { coords: [-38.735, -72.612], type: 'Hospital', dataKey: 'AvAlemania' },
+            { coords: [-38.741, -72.5886], type: 'Emergencia', dataKey: 'Centro' },
+            { coords: [-38.73251, -72.573499], type: 'Emergencia', dataKey: 'AvBarros' },
+            { coords: [-38.7576864, -72.622622], type: 'Hospital', dataKey: 'Venecia' },
+            { coords: [-38.7121813, -72.62405], type: 'Hospital', dataKey: 'PedroValdivia' },
+            { coords: [-38.7120641, -72.653935], type: 'Hospital', dataKey: 'FundoCarmen' },
+            { coords: [-38.7630844, -72.749384697], type: 'Hospital', dataKey: 'labranza' }
+        ];
+
+        // Añadir cada marcador al mapa y asociar su gráfico correspondiente
+        markers.forEach(({ coords, type, dataKey }) => {
+            L.marker(coords, { icon: icons[type] })
+                .addTo(map)
+                .on('click', e => mostrarGrafico(dataKey, e.latlng));
+        });
+
+        // Función para mostrar gráficos al hacer clic en un ícono
         function mostrarGrafico(tipo, latlng) {
-            // Crear el contenido del popup con un canvas para el gráfico
-            var popupContent = '<div class="chart-popup"><canvas id="chart-' + tipo + '" class="chart-container"></canvas></div>';
+            const data = chartData[tipo];  // Obtener los datos correspondientes
+            const popupContent = `
+                <div class="chart-popup">
+                    <canvas id="chart-${tipo}" class="chart-container"></canvas>
+                </div>`;
             
-            // Abrir el popup en las coordenadas del ícono clicado
-            var popup = L.popup()
+            // Abrir un popup en la posición del ícono
+            L.popup()
                 .setLatLng(latlng)
                 .setContent(popupContent)
                 .openOn(map);
 
-            // Esperar a que el popup esté completamente cargado para dibujar el gráfico
-            setTimeout(function() {
-                var ctx = document.getElementById('chart-' + tipo).getContext('2d');
-                var data = chartData[tipo];
-
-                // Crear el gráfico usando chart.js
+            // Esperar un momento para asegurarse que el canvas está disponible
+            setTimeout(() => {
+                const ctx = document.getElementById(`chart-${tipo}`).getContext('2d');
+                // Crear el gráfico usando Chart.js
                 new Chart(ctx, {
                     type: 'pie',
                     data: {
                         labels: data.labels,
-                        datasets: [{
-                            label: 'Datos de ' + tipo,
-                            data: data.data,
-                            backgroundColor: data.backgroundColor
-                        }]
+                        datasets: [{ data: data.data, backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#00C040'] }]
                     },
-                    options: {
-                        responsive: true,
-                    }
+                    options: { responsive: true }
                 });
-            }, 300);  // Pequeño retraso para asegurar que el canvas esté disponible
+            }, 300);
         }
 
-        // Agregar íconos personalizados para hospitales y emergencias
-        var hospitalIcon = L.icon({
-            iconUrl: 'ruta/a/icono-hospital.png',  // Cambia por la ruta a tu ícono de hospital
-            iconSize: [32, 32],  // Tamaño del ícono
-            iconAnchor: [16, 32],  // Punto de anclaje
+        // Evento para capturar y mostrar las coordenadas al hacer clic en el mapa
+        map.on('click', e => {
+            console.log(`Latitud: ${e.latlng.lat}, Longitud: ${e.latlng.lng}`);
+            L.popup()
+                .setLatLng(e.latlng)
+                .setContent(`Coordenadas: ${e.latlng.lat}, ${e.latlng.lng}`)
+                .openOn(map);
         });
-
-        var emergenciaIcon = L.icon({
-            iconUrl: 'ruta/a/icono-emergencia.png',  // Cambia por la ruta a tu ícono de emergencia
-            iconSize: [32, 32],  // Tamaño del ícono
-            iconAnchor: [16, 32],  // Punto de anclaje
-        });
-
-        // Añadir un marcador para un hospital con gráfico
-        L.marker([-38.735, -72.605], {icon: hospitalIcon}).addTo(map)
-            .on('click', function(e) {
-                mostrarGrafico('AvAlemania', e.latlng);
-            });
-
-        // Añadir un marcador para una emergencia con gráfico
-        L.marker([-38.745, -72.589], {icon: emergenciaIcon}).addTo(map)
-            .on('click', function(e) {
-                mostrarGrafico('Centro', e.latlng);
-            });
-
     </script>
 </body>
 </html>
