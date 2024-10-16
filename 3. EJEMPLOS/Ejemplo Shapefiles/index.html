@@ -44,31 +44,21 @@
                             case 'media': return {color: "orange"};
                             case 'baja': return {color: "yellow"};
                         }
-                    },
-                    onEachFeature: function (feature, layer) {
-                        // Mostrar un popup con la prioridad cuando se hace clic en una zona
-                        layer.on('click', function (e) {
-                            var prioridad = feature.properties.prioridad;
-                            var popup = L.popup()
-                                .setLatLng(e.latlng)
-                                .setContent("Prioridad: " + prioridad)
-                                .openOn(map);
-                        });
                     }
                 }).addTo(map);
             });
 
         // Datos para los gráficos en los íconos
         var chartData = {
-            'hospital': {
-                labels: ['Pacientes', 'Camas disponibles', 'Urgencias'],
-                data: [50, 30, 20],
-                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+            'AvAlemania': {
+                labels: ['Hospitales', 'Alta población', 'Comercio', 'Serv. Emergencias'],
+                data: [55, 10 , 15 ,20 ],
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#00C040']
             },
-            'emergencia': {
-                labels: ['Incendios', 'Accidentes', 'Otras emergencias'],
-                data: [40, 35, 25],
-                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+            'Centro': {
+                labels: ['Hospitales', 'Alta poblacion', 'Comercio', 'Serv. Emergencias'],
+                data: [10, 20, 30, 40],
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#00C040']
             }
         };
 
@@ -122,13 +112,13 @@
         // Añadir un marcador para un hospital con gráfico
         L.marker([-38.735, -72.605], {icon: hospitalIcon}).addTo(map)
             .on('click', function(e) {
-                mostrarGrafico('hospital', e.latlng);
+                mostrarGrafico('AvAlemania', e.latlng);
             });
 
         // Añadir un marcador para una emergencia con gráfico
         L.marker([-38.745, -72.589], {icon: emergenciaIcon}).addTo(map)
             .on('click', function(e) {
-                mostrarGrafico('emergencia', e.latlng);
+                mostrarGrafico('Centro', e.latlng);
             });
 
     </script>
