@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Luz Alerta - Bandeja de Reportes de Usuario">
+    <title>Reportes de Usuario - Luz Alerta</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .counter-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .counter {
+            font-size: 2.5rem;
+            background-color: #f8f9fa;
+            border: 2px solid #007bff;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #007bff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="#">Luz Alerta</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Mis Reportes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mt-5">
+        <h2 class="text-center">Mis Reportes</h2>
+
+        <!-- Contador de reportes más visible -->
+        <div class="counter-container">
+            <div class="counter">3</div>
+        </div>
+        <p class="text-center text-muted">Número de reportes registrados</p>
+
+        <div class="row mt-4">
+            <!-- Vista individual de un usuario -->
+            <div class="col-md-12">
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        Usuario: <strong>Juan Pérez</strong>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item">Reporte #1: Apagón en la zona norte. <span
+                                    class="badge badge-success">Resuelto</span></li>
+                            <li class="list-group-item">Reporte #2: Fallo en transformador. <span
+                                    class="badge badge-warning">En progreso</span></li>
+                            <li class="list-group-item">Reporte #3: Sobrecarga en el sistema. <span
+                                    class="badge badge-danger">Pendiente</span></li>
+                        </ul>
+                    </div>
+                    <div class="card-footer text-right">
+                        <button class="btn btn-primary btn-sm">Ver detalles</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center mt-5">
+        <p>© 2024 Luz Alerta - Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

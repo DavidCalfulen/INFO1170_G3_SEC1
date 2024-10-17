@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login y Register</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="assets/estilos.css">
 </head>
+
 <body>
 
     <main>
@@ -27,23 +31,14 @@
 
             <!--Formulario de Login y registro-->
             <div class="contenedor__login-register">
-                
+
                 <!-- Login -->
                 <form action="login.php" method="POST" class="formulario__login">
                     <h2>Iniciar Sesión</h2>
                     <input type="email" name="correo_electronico" placeholder="Correo Electrónico" required>
                     <input type="password" name="contrasena" placeholder="Contraseña" required>
                     <button type="submit">Entrar</button>
-                
 
-
-                   <!-- Selector para el tipo de cuenta -->
-                   <select name="tipo_cuenta" required>
-                    <option value="usuario">Usuario</option>
-                    <option value="empresa">Empresa</option>
-                </select>
-                
-                 
                 </form>
 
                 <!-- Register -->
@@ -52,10 +47,9 @@
                     <input type="text" name="nombre_completo" placeholder="Nombre completo" required>
                     <input type="email" name="correo_electronico" placeholder="Correo Electrónico" required>
                     <input type="password" name="contrasena" placeholder="Contraseña" required>
-                    <input type="text" name="Rut" placeholder="Rut" required
-                    pattern="\d{8}-\d{1}"
-                    title="El rut debe tener 8 digitos, seguido de un guion y un digito verificador">
-                    
+                    <input type="text" name="Rut" placeholder="Rut" required pattern="\d{8}-\d{1}"
+                        title="El rut debe tener 8 digitos, seguido de un guion y un digito verificador">
+
                     <button type="submit">Registrarse</button>
                 </form>
             </div>
@@ -64,4 +58,5 @@
 
     <script src="assets/script.js"></script>
 </body>
+
 </html>
