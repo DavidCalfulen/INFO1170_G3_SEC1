@@ -27,7 +27,7 @@ Paso 1: Configuración básica de GeoServer
 
 Instalación: Descarga e instala GeoServer desde su sitio oficial, geoserver.org.
 
-Acceso a la interfaz: Después de la instalación, accede a GeoServer a través del navegador (normalmente en http://localhost:8080/geoserver).
+Acceso a la interfaz: Después de la instalación, accede a GeoServer a través del navegador (http://localhost:8080/geoserver).
 
 Iniciar sesión: Ingresa con el usuario y contraseña predeterminados (admin, geoserver).
 

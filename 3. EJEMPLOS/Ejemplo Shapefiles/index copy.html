@@ -1,0 +1,97 @@
+<!-- 
+Descripción del Proyecto:
+Este proyecto utiliza Leaflet para crear un mapa interactivo centrado en Temuco, donde se visualizan zonas de prioridad 
+según su importancia (alta, media, baja) utilizando datos GeoJSON. 
+
+Además, se colocan íconos personalizados (hospitales y emergencias) en ubicaciones específicas dentro de las zonas 
+de alta prioridad. Al hacer clic en estos íconos, se muestra un gráfico interactivo con datos relevantes utilizando 
+Chart.js. 
+
+El objetivo del proyecto es mostrar información dinámica sobre la infraestructura en Temuco mediante un mapa sencillo 
+y visualmente claro. 
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Mapa de Prioridades</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Cargar estilos y scripts necesarios para Leaflet y Chart.js -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script src="https://unpkg.com/@turf/turf@6.5.0/turf.min.js"></script>
+
+    <style>
+        /* Estilo del contenedor del mapa */
+        #map { width: 100%; height: 600px; } 
+
+        /* Estilo de los popups con gráficos */
+        .chart-popup { width: 300px; height: 300px; } 
+        .chart-container { width: 100%; height: 100%; }
+    </style>
+</head>
+<body>
+    <!-- Contenedor donde se renderiza el mapa -->
+    <div id="map"></div> 
+
+    <script>
+        // Inicializa el mapa centrado en Temuco con un nivel de zoom de 12
+        const map = L.map('map').setView([-38.73965, -72.59842], 12);
+
+        // Agrega la capa base del mapa usando OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Inicializar el mapa
+        
+
+        var points = [];
+        var markers = [];
+        var hullPolygon = null;
+
+        // Agregar puntos en el mapa al hacer clic
+        map.on('click', function(e) {
+            var latlng = e.latlng;
+            points.push([latlng.lng, latlng.lat]);
+
+            // Agregar un marcador visual en el mapa
+            var marker = L.marker(latlng).addTo(map);
+            markers.push(marker);
+
+            // Si hay más de 2 puntos, calcular el convex hull
+            console.log(points.length)
+            if (points.length > 2) {
+                createConvexHull();
+            }
+        });
+
+        // Función para crear el convex hull
+        function createConvexHull() {
+            var turfPoints = turf.points(points);
+            var convexHull = turf.convex(turfPoints);
+
+            if (convexHull) {
+                // Limpiar convex hull anterior (si existe)
+                if (hullPolygon) {
+                    map.removeLayer(hullPolygon);
+                }
+
+                // Dibujar el nuevo convex hull
+                var coords = convexHull.geometry.coordinates[0].map(function(coord) {
+                    return [coord[1], coord[0]]; // Leaflet usa [lat, lng]
+                });
+
+                hullPolygon = L.polygon(coords, { color: 'red' }).addTo(map);
+            }
+        }
+
+        
+    </script>
+</body>
+</html>
+
